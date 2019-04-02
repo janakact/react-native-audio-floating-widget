@@ -44,9 +44,6 @@ public class RNAudioFloatingWidgetModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void show(ReadableMap options){
-
-      //if(!widget.isShown()){
-
           //validate options
           if(options.hasKey("withOptions")){
 
@@ -168,16 +165,25 @@ public class RNAudioFloatingWidgetModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void isShown(Callback callback){
-    if(widget.isShown()){
-      callback.invoke(true);
-    }else{
-      callback.invoke(false);
+    try{
+      if(widget.isShown()){
+        callback.invoke(true);
+      }else{
+        callback.invoke(false);
+      }
+    } catch(Exception e) {
+      // Block of code to handle errors
+        callback.invoke(false);
     }
   }
 
   @ReactMethod
   public void hide(){
-    widget.hide();
+    try{
+      widget.hide(); 
+    }
+    catch(Exception e) {
+    }
   }
 
   @ReactMethod
